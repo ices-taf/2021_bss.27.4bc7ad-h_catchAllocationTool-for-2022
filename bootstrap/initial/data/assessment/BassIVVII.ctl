@@ -22,7 +22,7 @@
 #  -------------------------
 1 				#_Nblock_Patterns
 1 #_blocks_per_pattern
-2015 2019 # begin and end years of blocks in first pattern
+2015 2020 # begin and end years of blocks in first pattern
 #
 
 #  -------------------------
@@ -108,7 +108,7 @@
 
 1 	#do_recdev:  0=none; 1=devvector; 2=simple deviations
 1955 	# first year of main recr_devs; early devs can preceed this era
-2016 	# last year of main recr_devs; update - Youngest survey age 2gp Endyear-2;
+2017 	# last year of main recr_devs; update - Youngest survey age 2gp Endyear-2;
 3 	#_recdev phase
 1 	# (0/1) to read 13 advanced options
 0 							#_recdev_early_start (0=none; neg value makes relative to recdev_start)
@@ -117,8 +117,8 @@
 1 							#_lambda for prior_fore_recr occurring before endyr+1
 1973.3 #_last_early_yr_nobias_adj_in_MPD
 1982.1 #_first_yr_fullbias_adj_in_MPD
-2016.9 #_last_yr_fullbias_adj_in_MPD
-2017.6 #_first_recent_yr_nobias_adj_in_MPD
+2017.9 #_last_yr_fullbias_adj_in_MPD
+2018.6 #_first_recent_yr_nobias_adj_in_MPD
 0.915 #_max_bias_adj_in_MPD (1.0 to mimic pre-2009 models)
 0 							#_period of cycles in recruitment (N parms read below)
 -5 							#min rec_dev
