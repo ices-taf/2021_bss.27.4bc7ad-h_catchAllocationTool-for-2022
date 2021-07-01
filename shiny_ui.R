@@ -17,7 +17,7 @@ allocations_inputpanel <-
     width = side_width,
     radioButtons(
       "AdviceType",
-      label = h4("Select 2020 catch advice"),
+      label = h4("Select 2021 catch advice"),
       choiceNames =
         list(
           HTML("EU MAP F<sub>MSY</sub>"),
