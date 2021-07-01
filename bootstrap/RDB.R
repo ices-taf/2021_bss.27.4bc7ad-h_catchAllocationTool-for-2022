@@ -6,7 +6,7 @@
 #' @name RDB
 #' @format csv files
 #' @tafOriginator ICES, WGCSE
-#' @tafYear 2020
+#' @tafYear 2021
 #' @tafAccess Public
 #' @tafSource script
 

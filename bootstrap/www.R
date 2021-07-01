@@ -5,7 +5,7 @@
 #' @name www
 #' @format png files
 #' @tafOriginator ICES
-#' @tafYear 2020
+#' @tafYear 2021
 #' @tafAccess Public
 #' @tafSource folder
 

@@ -5,7 +5,7 @@
 #' @name gear_lookup
 #' @format csv file
 #' @tafOriginator ICES
-#' @tafYear 2020
+#' @tafYear 2021
 #' @tafAccess Public
 #' @tafSource script
 
