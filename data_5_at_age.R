@@ -112,17 +112,17 @@ age_data <-
 
 # F at age
 fatage <-
-  assessmt$Z_at_age %>% filter(Year %in% 2017:2019) %>% select("0":"30") -
-    assessmt$M_at_age %>% filter(Year %in% 2017:2019) %>% select("0":"30")
+  assessmt$Z_at_age %>% filter(Year %in% 2018:2020) %>% select("0":"30") -
+    assessmt$M_at_age %>% filter(Year %in% 2018:2020) %>% select("0":"30")
 
 fatage <- unname(unlist(colMeans(fatage)))
 
 # catch at age
-catage <- t(assessmt$catage[assessmt$catage$Yr == 2019, paste(0:30)])
+catage <- t(assessmt$catage[assessmt$catage$Yr == 2020, paste(0:30)])
 
 # F for recreational
-age_data$F_age_rec_2020 <- catage[, 6] / rowSums(catage) * fatage
-age_data$F_age_rec_2020 <- ifelse(is.nan(age_data$F_age_rec_2020), 0, age_data$F_age_rec_2020)
+age_data$F_age_rec_2021 <- catage[, 6] / rowSums(catage) * fatage
+age_data$F_age_rec_2021 <- ifelse(is.nan(age_data$F_age_rec_2021), 0, age_data$F_age_rec_2021)
 
 
 # F at age in discards
@@ -154,11 +154,11 @@ age_data <-
   ) %>%
   group_by(Age) %>%
   summarise(
-    F_age_disc_2020 = sum(Ffleet * (1 - ret_frac))
+    F_age_disc_2021 = sum(Ffleet * (1 - ret_frac))
   ) %>%
   mutate(
-    F_age_disc_2020 = ifelse(is.nan(F_age_disc_2020), 0, F_age_disc_2020),
-    Discard_Sel = F_age_disc_2020 / sum(F_age_disc_2020, na.rm = TRUE)
+    F_age_disc_2021 = ifelse(is.nan(F_age_disc_2021), 0, F_age_disc_2021),
+    Discard_Sel = F_age_disc_2021 / sum(F_age_disc_2021, na.rm = TRUE)
   ) %>%
   right_join(age_data, by = "Age")
 
@@ -192,10 +192,10 @@ age_data <-
   ) %>%
   group_by(Age) %>%
   summarise(
-    F_age_land_2020 = sum(Ffleet * ret_frac)
+    F_age_land_2021 = sum(Ffleet * ret_frac)
   ) %>%
   mutate(
-    F_age_land_2020 = ifelse(is.nan(F_age_land_2020), 0, F_age_land_2020)
+    F_age_land_2021 = ifelse(is.nan(F_age_land_2021), 0, F_age_land_2021)
   ) %>%
   right_join(age_data, by = "Age")
 
@@ -204,7 +204,7 @@ recF_multiplier <- 1.428
 age_data <-
   age_data %>%
   mutate(
-    Z_age_2020 = M + F_age_land_2020 + F_age_disc_2020 + F_age_rec_2020 * recF_multiplier
+    Z_age_2021 = M + F_age_land_2021 + F_age_disc_2021 + F_age_rec_2021 * recF_multiplier
   )
 
 
@@ -233,26 +233,26 @@ age_data$F_age_rec_2012 <- ifelse(is.nan(age_data$F_age_rec_2012), 0, age_data$F
 
 natage <-
   assessmt$natage %>%
-  filter(Yr == 2020 & `Beg/Mid` == "B") %>%
+  filter(Yr == 2021 & `Beg/Mid` == "B") %>%
   select("0":"30") %>%
   t() %>%
   c()
 
 gm <- function(x) exp(mean(log(unlist(x))))
-# 2020 age 0 replaced by 2008-2017 GM;
+# 2021 age 0 replaced by 2009-2018 GM;
 natage[1] <-
   assessmt$natage %>%
-  filter(Yr %in% 2008:2017 & `Beg/Mid` == "B") %>%
+  filter(Yr %in% 2009:2018 & `Beg/Mid` == "B") %>%
   select("0") %>%
   gm()
 
-# 2020 age 1 replaced by SS3 survivor estimate at age 1, 2020 * GM / SS3 estimate of age 0, 2019
-natage[2] <- natage[2] * natage[1] / filter(assessmt$natage, Yr == 2019 & `Beg/Mid` == "B")[["0"]]
-natage[3] <- natage[3] * natage[1] / filter(assessmt$natage, Yr == 2018 & `Beg/Mid` == "B")[["0"]]
+# 2021 age 1 replaced by SS3 survivor estimate at age 1, 2021 * GM / SS3 estimate of age 0, 2018
+natage[2] <- natage[2] * natage[1] / filter(assessmt$natage, Yr == 2020 & `Beg/Mid` == "B")[["0"]]
+natage[3] <- natage[3] * natage[1] / filter(assessmt$natage, Yr == 2019 & `Beg/Mid` == "B")[["0"]]
 
-# roll forward to 2021!
-age_data$N_2020 <- natage
-age_data$N <- c(natage[1], natage * exp(-age_data$Z_age_2020))[-(nrow(age_data) + 1)]
+# roll forward to 2022!
+age_data$N_2021 <- natage
+age_data$N <- c(natage[1], natage * exp(-age_data$Z_age_2021))[-(nrow(age_data) + 1)]
 
 # maturity
 age_data$mat <-
@@ -264,9 +264,9 @@ age_data$mat <-
 
 
 # process plus group
-age_data$stkwt[age_data$Age == 16] <- sum((age_data$N_2020 * age_data$stkwt)[age_data$Age >= 16]) / sum(age_data$N_2020[age_data$Age >= 16])
+age_data$stkwt[age_data$Age == 16] <- sum((age_data$N_2021 * age_data$stkwt)[age_data$Age >= 16]) / sum(age_data$N_2021[age_data$Age >= 16])
 age_data$N[age_data$Age == 16] <- sum(age_data$N[age_data$Age >= 16])
-age_data$N_2020[age_data$Age == 16] <- sum(age_data$N_2020[age_data$Age >= 16])
+age_data$N_2021[age_data$Age == 16] <- sum(age_data$N_2021[age_data$Age >= 16])
 
 age_data <- filter(age_data, Age <= 16)
 
