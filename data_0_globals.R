@@ -9,8 +9,7 @@ globals <-
     # years for selectivity calcs
     yr_idx = c(2017, 2018),
     ages = 0:16,
-    current_year = 2020
+    current_year = 2021
   )
-
 
 save(globals, file = "data/globals.RData")
