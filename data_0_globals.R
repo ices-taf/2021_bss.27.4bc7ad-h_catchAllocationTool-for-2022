@@ -1,5 +1,5 @@
 
-# save a global setting file for use in other places
+# save a global setting file for use in other places.
 
 mkdir("data")
 
