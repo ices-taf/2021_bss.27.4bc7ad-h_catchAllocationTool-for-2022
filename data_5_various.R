@@ -37,16 +37,16 @@ other_data$noVessels <- read.taf("bootstrap/data/Number_Vessels.csv")
 other_data$RecFs <- read.taf("bootstrap/data/BagLimitFs.csv")
 
 
-other_data$AdviceScenarios <- advice
+other_data$AdviceScenarios <- advice[1,]
 
 
 ## ICES advice (http://ices.dk/sites/pub/Publication%20Reports/Advice/2019/2019/bss.27.4bc7ad-h.pdf)
 # Options for MAP
-other_data$ICESadvMSY <- advice[trimws(advice$Basis) == "EU MAP FMSY", "Total catch (2022)"]
-other_data$ICESadvMSYlow <- advice[trimws(advice$Basis) == "EU MAP FMSY lower", "Total catch (2022)"]
+other_data$ICESadvMSY <- advice[trimws(advice$Basis) == "FMSY", "Total catch (2022)"]
+other_data$ICESadvMSYlow <- advice[trimws(advice$Basis) == "FMSY lower", "Total catch (2022)"]
 # Recreational catches from catch scenario (not used as a limit, just for comparison)
-other_data$ICESadvMSYRec <- advice[trimws(advice$Basis) == "EU MAP FMSY", "Recreational removals (2022)"]
-other_data$ICESadvMSYlowRec <- advice[trimws(advice$Basis) == "EU MAP FMSY lower", "Recreational removals (2022)"]
+other_data$ICESadvMSYRec <- advice[trimws(advice$Basis) == "FMSY", "Recreational removals (2022)"]
+other_data$ICESadvMSYlowRec <- advice[trimws(advice$Basis) == "FMSY lower", "Recreational removals (2022)"]
 
 
 # Fbar of recreational fishery in 2012

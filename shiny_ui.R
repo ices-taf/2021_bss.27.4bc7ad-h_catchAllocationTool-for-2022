@@ -17,13 +17,12 @@ allocations_inputpanel <-
     width = side_width,
     radioButtons(
       "AdviceType",
-      label = h4("Select 2021 catch advice"),
+      label = h4("2022 catch advice"),
       choiceNames =
         list(
-          HTML("EU MAP F<sub>MSY</sub>"),
-          HTML("EU MAP F<sub>MSY lower</sub>")
+          HTML("F<sub>MSY</sub>")
         ),
-      choiceValues = list("MSY", "MSYlow"),
+      choiceValues = list("MSY"),
       inline = TRUE,
       selected = "MSY"
     ),
@@ -130,7 +129,7 @@ allocations_resultspanel_wide <-
     column(12,
       conditionalPanel("output.hide_panel",
         wellPanel(
-          h5(helpText("Table 3: Forecast scenarios. Comparison between the simulated scenario (highlighted row) and the basis of ICES advice for 2020. Weights are in tonnes. Note that the '% Advice change' value is relative to the advice for the corresponding scenario for 2020: FMSY (1946 tonnes) and FMSY lower (1634 tonnes).")),
+          h5(helpText("Table 3: Forecast scenarios. Comparison between the simulated scenario (highlighted row) and the basis of ICES advice for 2022. Weights are in tonnes. Note that the '% Advice change' value is relative to the advice for the corresponding FMSY scenario for 2021 (2000 tonnes).")),
           br(),
           DT::dataTableOutput("forecastTable")
         )
@@ -155,7 +154,7 @@ ui <-
       "Introduction",
       includeMarkdown("Introduction.Rmd")
     ),
-    
+
   tabPanel(
     "Instructions",
     includeMarkdown("Instructions.Rmd")
